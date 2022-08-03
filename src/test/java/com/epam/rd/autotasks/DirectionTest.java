@@ -35,13 +35,13 @@ class DirectionTest {
     @ParameterizedTest
     @MethodSource
     void opposite(Direction expected, Direction source) {
-        assertEquals(expected, source.opposite());
+        assertEquals(expected, source.opposite(source));
     }
 
     @ParameterizedTest
     @MethodSource
     void differenceDegreesTo(int expected, Direction source, Direction param) {
-        assertEquals(expected, source.differenceDegreesTo(param));
+        assertEquals(expected, source.differenceDegreesTo(source,param));
     }
 
     public static Stream<Arguments> ofDegrees() {

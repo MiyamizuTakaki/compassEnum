@@ -1,5 +1,5 @@
 package com.epam.rd.autotasks;
-
+import static java.lang.Math.*;
 import java.util.Optional;
 
 public enum Direction {
@@ -48,14 +48,70 @@ public enum Direction {
     }
 
     public static Direction closestToDegrees(int degrees) {
-        throw new UnsupportedOperationException();
+        try{
+            while(degrees<0||degrees>=360)
+            {
+                if(degrees<0)
+                    degrees = degrees+360;
+                else if(degrees>=360)
+                    degrees = degrees-360;
+            }
+            Direction []allinfo = Direction.values();
+            int min = 999;
+            for (Direction direction : allinfo) {
+                if (min > abs(direction.degrees - degrees))
+                    min = abs(direction.degrees - degrees);
+            }
+            for (Direction direction : allinfo) {
+                if(min == abs(direction.degrees - degrees))
+                    return direction;
+            }
+            return null;
+        }catch (Exception e)
+        {
+            throw new UnsupportedOperationException();
+        }
+
     }
 
-    public Direction opposite() {
-        throw new UnsupportedOperationException();
+    public Direction opposite(Direction enums) {
+        try{
+            switch (enums){
+                case N:
+                    return S;
+                case NE:
+                    return SW;
+                case E:
+                    return W;
+                case SE:
+                    return NW;
+                case S:
+                    return N;
+                case SW:
+                    return NE;
+                case W:
+                    return E;
+                case NW:
+                    return SE;
+                default:
+                    return null;
+            }
+        }catch (Exception e)
+        {
+            throw new UnsupportedOperationException();
+        }
+
     }
 
-    public int differenceDegreesTo(Direction direction) {
-        throw new UnsupportedOperationException();
+    public int differenceDegreesTo(Direction source, Direction param) {
+        try{
+            int agl = abs(source.degrees-param.degrees);
+            if(agl>180)
+                agl = abs(agl-360);
+            return agl;
+        }catch (Exception e){
+            throw new UnsupportedOperationException();
+        }
+
     }
 }
